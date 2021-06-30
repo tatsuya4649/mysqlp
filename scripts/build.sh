@@ -2,6 +2,7 @@
 
 DOCKER="../Dockerfile"
 
+source ./docker_name.sh
 source ./version.sh
 
 if [ -f $DOCKER ]; then
