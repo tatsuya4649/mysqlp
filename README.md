@@ -15,6 +15,10 @@ MySQL Port Number usage in docker container.
 
 use in docker container name.
 
+## DATADIR
+
+MySQL Datadirectory. use in docker container.
+
 ## VERSION
 
 use in Dockerfile. version number.
