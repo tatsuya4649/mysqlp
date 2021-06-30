@@ -31,4 +31,11 @@ apt_check
 python_install
 
 # Python file
-./$TESTFILE
+pip3 install -r ./requirements.txt
+
+if python ./$TESTFILE; then
+	echo "Success MySQL Test"
+else
+	echo "Failure MySQL Test"
+fi
+
