@@ -22,4 +22,6 @@ apt_check
 # docker install
 $SUDO apt update && $SUDO apt install docker
 $SUDO usermod -aG docker ${USER}
+# install 
+$SUDP apt install jq
 

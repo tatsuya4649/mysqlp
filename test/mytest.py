@@ -1,4 +1,5 @@
 #!/bin/env python
+import os
 import pymysql
 
 
@@ -36,7 +37,7 @@ def test(host,user,passwd):
 
 
 if __name__ == "__main__":
-	_HOST='localhost'
-	_USER='root'
-	_PASSWORD='mysql'
+	_HOST=os.environ['TESTIP']
+	_USER=os.environ['TESTUSER']
+	_PASSWORD=os.environ['TESTPASSWD']
 	test(_HOST,_USER,_PASSWORD)
