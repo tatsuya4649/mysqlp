@@ -1,12 +1,7 @@
 FROM mysql:8.0
 
-# move in etc directory
-WORKDIR	/etc
-# Copy setting file
-COPY	./myconf mysql
-EXPOSE	33306
+EXPOSE	3306
 
-# Setting Database/Table Schema
-WORKDIR /home
-COPY ./schema	./schema
-RUN	mysql -u root -p < ./schema/*
+# initial schema
+COPY	./schema/database.sql	/docker-entrypoint-initdb.d/databse.sql
+COPY	./schema/table.sql	/docker-entrypoint-initdb.d/table.sql
