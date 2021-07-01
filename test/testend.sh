@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # setting file for name,version,etc.
-./const.sh
+source ./const.sh
 
 # End Scripts of Test
 # Delete unnecessary containers etc.
@@ -21,7 +21,7 @@ fi
 # Delete Test Network
 TEST_NET=$(docker network ls -f name=$TESTNETNAME -q)
 if [ -n "$TEST_NET" ]; then
-	docker network rm -f $TEST_NET
+	docker network rm $TEST_NET
 	echo "delete test network"
 else
 	echo "not found test network..."

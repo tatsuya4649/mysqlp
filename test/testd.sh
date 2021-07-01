@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # setting file for name,version,etc.
-./const.sh
+source ./const.sh
 
 HOSTPORT=13306
 PORT=3306
@@ -30,5 +30,11 @@ else
 	echo "can't get CONTAINER_ID"
 	exit 1
 fi
+
+echo $HOSTPORT
+echo $PORT
+echo $IP
+echo $TESTNAME
+echo $VERSION
 
 docker run --network $TESTNETNAME -t -p $HOSTPORT:$PORT -e TESTIP=$IP --env-file TESTENV $TESTNAME:$VERSION
