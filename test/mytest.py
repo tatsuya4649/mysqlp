@@ -2,13 +2,15 @@
 import os
 import pymysql
 
-
-def test_wrapper(f):
-	def _wrapper(*args,**kwargs):
-		print("-----------------------")
-		f(*args,**kwargs)
-		print("-----------------------")
-	return _wrapper
+def test_wrapper(comment):
+	def _test_wrapper(f):
+		def _wrapper(*args,**kwargs):
+			print("-----------------------")
+			print(f"{comment} Start...")
+			f(*args,**kwargs)
+			print("-----------------------")
+		return _wrapper
+	return _test_wrapper
 
 def connection(host,user,passwd,database):
 	# Not Connect Specific Database
@@ -21,6 +23,21 @@ def connection(host,user,passwd,database):
 	)
 	return conn
 
+# DELETE TEST to MySQL Server
+@test_wrapper("DELETE")
+def delete_test(host,user,passwd,database,table,where):
+	pass
+
+# UPDATE TEST to MySQL Server
+@test_wrapper("UPDATE")
+def update_test(host,user,passwd,database,table,where):
+	pass
+
+# INSERT TEST to MySQL Server
+@test_wrapper("INSERT")
+def insert_test(host,user,passwd,database,table,value):
+	pass
+
 # SELECT TEST to MySQL Server
 def _select(conn,table,where):
 	sql = f"SELECT * FROM {table} WHERE {where}"
@@ -32,7 +49,7 @@ def _select(conn,table,where):
 		for r in results:
 			print(r)
 	return
-@test_wrapper
+@test_wrapper("SELECT")
 def select_test(host,user,passwd,database,table,where):
 	# new connection
 	conn = connection(host,user,passwd,database)
@@ -45,7 +62,7 @@ def select_test(host,user,passwd,database,table,where):
 			print("Select SUCCESS!")
 	return
 # PING TEST to MySQL Server
-@test_wrapper
+@test_wrapper("PING")
 def ping_test(host,user,passwd,database):
 	# new connection
 	conn = connection(host,user,passwd,database)
@@ -58,9 +75,13 @@ def ping_test(host,user,passwd,database):
 			print("Ping SUCCESS!")
 	return
 
-def test(host,user,passwd,database,table,where):
+def test(host,user,passwd,database,table,where,values):
 	ping_test(host,user,passwd,database)
 	select_test(host,user,passwd,database,table,where)
+	insert_test(host,user,passwd,database,table,values)
+	update_test(host,user,passwd,database,table,values)
+	delete_test(host,user,passwd,database,table,values)
+	
 
 
 if __name__ == "__main__":
@@ -78,4 +99,7 @@ if __name__ == "__main__":
 	_WHERE=os.environ['TESTWHERE']
 	_WHERE=_WHERE.replace('"','')
 	print(f"MySQL TEST SERVER TABLE CONDITION => {_WHERE}")
-	test(_HOST,_USER,_PASSWORD,_DATABASE,_TABLE,_WHERE)
+	_VALUES=os.environ['TESTVALUES']
+	_VALUES=_VALUES.replace('"','')
+	print(f"MySQL TEST SERVER TABLE INSERT/UPDATE/DELETE VALUE => {_VALUES}")
+	test(_HOST,_USER,_PASSWORD,_DATABASE,_TABLE,_WHERE,_VALUES)
