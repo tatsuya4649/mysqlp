@@ -1,8 +1,8 @@
 
 function test_const(){
 	TESTNET="../TESTNET"
-	VERSION_FILE="../VERSION"
-	TESTNAME_FILE="../TESTNAME"
+	VERSION_FILE="./VERSION"
+	TESTNAME_FILE="./TESTNAME"
 
 	if [ -f $TESTNET ]; then
 		TESTNETNAME=$(cat $TESTNET)
@@ -17,7 +17,7 @@ function test_const(){
 	fi
 
 	if [ -f $TESTNAME_FILE ]; then
-		TESTNAME=$(cat ../TESTNAME)
+		TESTNAME=$(cat $TESTNAME_FILE)
 	else
 		echo "not found test name file..."
 	fi

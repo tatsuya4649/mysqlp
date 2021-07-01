@@ -13,3 +13,5 @@ cd ../test
 # Build Test Container, And RUN.
 # And Python MySQL Test scripts.
 test/testd.sh
+# End Test,And Delete Test Container
+test/testend.sh
