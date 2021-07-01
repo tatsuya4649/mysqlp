@@ -38,6 +38,8 @@ def test(host,user,passwd):
 
 if __name__ == "__main__":
 	_HOST=os.environ['TESTIP']
+	print(_HOST)
 	_USER=os.environ['TESTUSER']
+	print(_USER)
 	_PASSWORD=os.environ['TESTPASSWD']
 	test(_HOST,_USER,_PASSWORD)

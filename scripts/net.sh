@@ -1,11 +1,7 @@
 #!/bin/bash
 
-TESTNET="../TESTNET"
-
-if [ -f $TESTNET ];then
-	TESTNETNAME=$(cat TESTNET)
-else
-	echo "not found test network file..."
+source ./netname.sh
+if ! docker network create $TESTNETNAME; then
+	echo "network create failure..."
+	exit 1
 fi
-
-docker create network $TESTNETNAME
