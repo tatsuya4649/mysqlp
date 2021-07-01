@@ -28,6 +28,8 @@ def ping_test(conn):
 			res = conn.ping()
 		except pymysql.err.OperationalError as e:
 			print(e)
+		else:
+			print("Ping SUCCESS!")
 	return
 
 @test_wrapper
@@ -38,8 +40,9 @@ def test(host,user,passwd):
 
 if __name__ == "__main__":
 	_HOST=os.environ['TESTIP']
-	print(_HOST)
+	_HOST=_HOST.replace('"','').split('/')[0]
+	print(f"MySQL TEST SERVER IP ADDRESS => {_HOST}")
 	_USER=os.environ['TESTUSER']
-	print(_USER)
+	print(f"MySQL TEST SERVER USER NAME => {_USER}")
 	_PASSWORD=os.environ['TESTPASSWD']
 	test(_HOST,_USER,_PASSWORD)

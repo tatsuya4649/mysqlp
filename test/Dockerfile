@@ -7,5 +7,4 @@ COPY ./mytest.py ./mytest.py
 RUN	pip install -r requirements.txt
 EXPOSE	3306
 
-ENTRYPOINT	env
-#ENTRYPOINT	["python","mytest.py"]
+ENTRYPOINT	["python","mytest.py"]
