@@ -6,15 +6,9 @@ source ./docker_name.sh
 source ./datadir.sh
 source ./net.sh
 
-ENVFILE="ENV"
-
-echo $HOSTPORT
-echo $PORT
-echo $TESTNETNAME
-echo $DOCKER_NAME
-echo $ENVFILE
-echo $DATADIR
 cd ..
+
+ENVFILE="ENV"
 VIND="-v $PWD/myconf/conf.d:/etc/mysql/conf.d"
 if [ -n "$DATADIR" ];then
 	VIND="$VIND -v $DATADIR:/var/lib/mysql"

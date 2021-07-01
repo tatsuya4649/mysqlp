@@ -1,16 +1,10 @@
 #!/bin/bash
 
-TESTNET="../TESTNET"
-TESTNAME=testmy
-VERSION=0.0
+# setting file for name,version,etc.
+./const.sh
+
 HOSTPORT=13306
 PORT=3306
-
-if [ -f $TESTNET ]; then
-	TESTNETNAME=$(cat $TESTNET)
-else
-	echo "not found test net file..."
-fi
 
 # if already exist image, delete
 ALREADY=$(docker images $TESTNAME -q)

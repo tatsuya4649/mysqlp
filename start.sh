@@ -4,9 +4,11 @@
 source ./setup.sh
 
 # MySQL Server Setup
-scripts/build.sh
-scripts/run.sh
+cd scripts
+./build.sh
+./run.sh
 
+cd ../test
 # MySQL Test Setup
 # Build Test Container, And RUN.
 # And Python MySQL Test scripts.
