@@ -6,9 +6,7 @@ WORKDIR	/etc
 COPY	./myconf mysql
 EXPOSE	33306
 
-# Test scripts mysql
-#WORKDIR /home
-#COPY	./test .
-#COPY 	./requirements.txt .
-# Test Python Scripts
-#RUN	./mysql_test.sh
+# Setting Database/Table Schema
+WORKDIR /home
+COPY ./schema	./schema
+RUN	mysql -u root -p < ./schema/*
