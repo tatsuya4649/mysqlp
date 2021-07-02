@@ -21,8 +21,8 @@ apt_check
 
 # docker install
 $SUDO apt update && $SUDO apt install -y docker docker.io
-USER=$(whoami)
-$SUDO usermod -aG docker ${USER}
+FIRSTUSER=$(whoami)
+$SUDO usermod -aG docker ${FIRSTUSER}
 # install 
 $SUDP apt install jq
 
