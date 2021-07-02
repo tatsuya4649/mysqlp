@@ -1,4 +1,4 @@
 
-# My Private MySQL
+# MySQL Server Shell Tool
 
 

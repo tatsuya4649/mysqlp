@@ -1,7 +1,11 @@
 #!/bin/bash
 
 # install docker and etc application 
-source ./setup.sh
+if [ -z "$1" ]; then
+	source ./setup.sh
+else
+	echo "DEBUG Mode"
+fi
 
 # MySQL Server Setup
 cd scripts
@@ -12,6 +16,6 @@ cd ../test
 # MySQL Test Setup
 # Build Test Container, And RUN.
 # And Python MySQL Test scripts.
-test/testd.sh
+./testd.sh
 # End Test,And Delete Test Container
-test/testend.sh
+./testend.sh

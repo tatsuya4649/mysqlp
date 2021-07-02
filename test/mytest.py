@@ -1,5 +1,6 @@
 #!/bin/env python
 import os
+import sys
 import pymysql
 
 def test_wrapper(comment):
@@ -75,31 +76,54 @@ def ping_test(host,user,passwd,database):
 			print("Ping SUCCESS!")
 	return
 
-def test(host,user,passwd,database,table,where,values):
-	ping_test(host,user,passwd,database)
-	select_test(host,user,passwd,database,table,where)
-	insert_test(host,user,passwd,database,table,values)
-	update_test(host,user,passwd,database,table,values)
-	delete_test(host,user,passwd,database,table,values)
+def test(host,user,passwd,database,table,where,values,funcs):
+	for func in funcs:
+		if func is ping_test:
+			ping_test(host,user,passwd,database)
+		elif func is select_test:
+			select_test(host,user,passwd,database,table,where)
+		elif func is insert_test:
+			insert_test(host,user,passwd,database,table,values)
+		elif func is update_test:
+			update_test(host,user,passwd,database,table,values)
+		elif func is delete_test:
+			delete_test(host,user,passwd,database,table,values)
 	
 
 
 if __name__ == "__main__":
-	_HOST=os.environ['TESTIP']
-	_HOST=_HOST.replace('"','').split('/')[0]
-	print(f"MySQL TEST SERVER IP ADDRESS => {_HOST}")
-	_USER=os.environ['TESTUSER']
-	print(f"MySQL TEST SERVER USER NAME => {_USER}")
-	_PASSWORD=os.environ['TESTPASSWD']
+	func = list()
+	try:
+		_HOST=os.environ['TESTIP']
+		_HOST=_HOST.replace('"','').split('/')[0]
+		print(f"MySQL TEST SERVER IP ADDRESS => {_HOST}")
+		_USER=os.environ['TESTUSER']
+		print(f"MySQL TEST SERVER USER NAME => {_USER}")
+		_PASSWORD=os.environ['TESTPASSWD']
 
-	_DATABASE=os.environ['TESTDATABASE']
-	print(f"MySQL TEST SERVER DATABASE NAME => {_DATABASE}")
-	_TABLE=os.environ['TESTTABLE']
-	print(f"MySQL TEST SERVER TABLE NAME => {_TABLE}")
-	_WHERE=os.environ['TESTWHERE']
-	_WHERE=_WHERE.replace('"','')
-	print(f"MySQL TEST SERVER TABLE CONDITION => {_WHERE}")
-	_VALUES=os.environ['TESTVALUES']
-	_VALUES=_VALUES.replace('"','')
-	print(f"MySQL TEST SERVER TABLE INSERT/UPDATE/DELETE VALUE => {_VALUES}")
-	test(_HOST,_USER,_PASSWORD,_DATABASE,_TABLE,_WHERE,_VALUES)
+		_DATABASE=os.environ['TESTDATABASE']
+		print(f"MySQL TEST SERVER DATABASE NAME => {_DATABASE}")
+		_TABLE=os.environ['TESTTABLE']
+		print(f"MySQL TEST SERVER TABLE NAME => {_TABLE}")
+
+		func.append(ping_test)
+	except KeyError as e:
+		print(f"not found env variables => {e}")
+		sys.exit(1)
+	try:
+		_WHERE=os.environ['TESTWHERE']
+		_WHERE=_WHERE.replace('"','')
+		print(f"MySQL TEST SERVER TABLE CONDITION => {_WHERE}")
+		func.append(select_test)
+	except:
+		pass
+	try:
+		_VALUES=os.environ['TESTVALUES']
+		_VALUES=_VALUES.replace('"','')
+		print(f"MySQL TEST SERVER TABLE INSERT/UPDATE/DELETE VALUE => {_VALUES}")
+		func.append(insert_test)
+		func.append(delete_test)
+		func.append(update_test)
+	except:
+		pass
+	test(_HOST,_USER,_PASSWORD,_DATABASE,_TABLE,_WHERE,_VALUES,func)
