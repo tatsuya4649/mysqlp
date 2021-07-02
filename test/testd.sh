@@ -7,13 +7,13 @@ HOSTPORT=13306
 PORT=3306
 
 # if already exist image, delete
-ALREADY=$(docker images $TESTNAME -q)
+ALREADY=$($SUDO docker images $TESTNAME -q)
 if [ -n "$ALREADY" ]; then
-	docker rmi -f $ALREADY
+	$SUDO docker rmi -f $ALREADY
 	echo "delete $TESTNAME image"
 fi
 
-docker build -t $TESTNAME:$VERSION .
+$SUDO docker build -t $TESTNAME:$VERSION .
 
 # get container ip address
 cd ../scripts/
@@ -21,10 +21,10 @@ source ../scripts/gcontid.sh
 gcontid
 cd ../test/
 
-CONTAINER_DETAIL_ID=$(docker container inspect $CONTAINER_ID | jq .[0].Id)
+CONTAINER_DETAIL_ID=$($SUDO docker container inspect $CONTAINER_ID | jq .[0].Id)
 echo "$DOCKER_NAME CONTAINER_DETAIL_ID => $CONTAINER_DETAIL_ID"
 if [ -n "$CONTAINER_DETAIL_ID" ]; then
-	IP=$(docker network inspect testmysql | jq .[0].Containers."$CONTAINER_DETAIL_ID".IPv4Address)
+	IP=$($SUDO docker network inspect testmysql | jq .[0].Containers."$CONTAINER_DETAIL_ID".IPv4Address)
 	echo "IP Address => $IP"
 else
 	echo "can't get CONTAINER_ID"
@@ -37,4 +37,4 @@ echo $IP
 echo $TESTNAME
 echo $VERSION
 
-docker run --network $TESTNETNAME -t -p $HOSTPORT:$PORT -e TESTIP=$IP --env-file TESTENV $TESTNAME:$VERSION
+$SUDO docker run --network $TESTNETNAME -t -p $HOSTPORT:$PORT -e TESTIP=$IP --env-file TESTENV $TESTNAME:$VERSION

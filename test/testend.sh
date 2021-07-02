@@ -7,10 +7,10 @@ source ./const.sh
 # Delete unnecessary containers etc.
 
 # Delete Test Image
-TEST_IMAGE=$(docker images  $TESTNAME -q)
+TEST_IMAGE=$($SUDO docker images  $TESTNAME -q)
 
 if [ -n "$TEST_IMAGE" ]; then
-	docker rmi -f $TEST_IMAGE
+	$SUDO docker rmi -f $TEST_IMAGE
 	echo "Test Image Delete!"
 else
 	echo "not found test image..."
@@ -19,9 +19,9 @@ fi
 
 
 # Delete Test Network
-TEST_NET=$(docker network ls -f name=$TESTNETNAME -q)
+TEST_NET=$($SUDO docker network ls -f name=$TESTNETNAME -q)
 if [ -n "$TEST_NET" ]; then
-	docker network rm $TEST_NET
+	$SUDO docker network rm $TEST_NET
 	echo "delete test network"
 else
 	echo "not found test network..."
