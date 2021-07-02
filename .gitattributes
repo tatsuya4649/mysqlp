@@ -1,0 +1,6 @@
+DATADIR filter=git-crypt diff=git-crypt
+PORT filter=git-crypt diff=git-crypt
+HOSTPORT filter=git-crypt diff=git-crypt
+TESTNET filter=git-crypt diff=git-crypt
+ENV filter=git-crypt diff=git-crypt
+DOCKER_NAME filter=git-crypt diff=git-crypt
