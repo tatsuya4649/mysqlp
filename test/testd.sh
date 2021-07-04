@@ -2,6 +2,7 @@
 
 # setting file for name,version,etc.
 source ./const.sh
+source ./sudo.sh
 
 HOSTPORT=13306
 PORT=3306

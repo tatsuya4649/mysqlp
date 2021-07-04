@@ -2,6 +2,7 @@
 
 # setting file for name,version,etc.
 source ./const.sh
+source ./sudo.sh
 
 # End Scripts of Test
 # Delete unnecessary containers etc.

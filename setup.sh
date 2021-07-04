@@ -10,7 +10,7 @@ function sudo_check(){
 }
 
 function apt_check(){
-	if ! apt -h ; then
+	if ! $SUDO apt -h > /dev/null 2>&1; then
 		echo "not apt found"
 		exit 1
 	fi
@@ -26,5 +26,5 @@ $SUDO apt update && $SUDO apt install -y docker docker.io
 #$SUDO chgrp docker /var/run/docker.sock
 #$SUDO systemctl restart docker
 # install 
-$SUDO apt install jq
+$SUDO apt install -y jq
 
