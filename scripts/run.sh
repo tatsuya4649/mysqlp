@@ -16,4 +16,4 @@ else
 	VIND="$VIND"
 fi
 echo $VIND
-docker run --network $TESTNETNAME --name $DOCKER_NAME --env-file $ENVFILE $VIND -it -d -p $HOSTPORT:$PORT $DOCKER_NAME:$VERSION
+$SUDO docker run --network $TESTNETNAME --name $DOCKER_NAME --env-file $ENVFILE $VIND -it -d -p $HOSTPORT:$PORT $DOCKER_NAME:$VERSION

@@ -9,8 +9,8 @@ fi
 
 # MySQL Server Setup
 cd scripts
-./build.sh
-./run.sh
+source ./build.sh
+source ./run.sh
 
 cd ../test
 # MySQL Test Setup
