@@ -2,7 +2,8 @@
 
 function gcontid(){
 	source ./docker_name.sh
-	CONTAINER_ID=$(docker container ls -aq --filter name=$DOCKER_NAME)
+	source ./sudo.sh
+	CONTAINER_ID=$($SUDO docker container ls -aq --filter name=$DOCKER_NAME)
 
 	# if None container
 	if [ -z "$CONTAINER_ID" ]; then
