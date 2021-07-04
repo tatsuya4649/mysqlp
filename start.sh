@@ -16,6 +16,6 @@ cd ../test
 # MySQL Test Setup
 # Build Test Container, And RUN.
 # And Python MySQL Test scripts.
-./testd.sh
+source ./testd.sh
 # End Test,And Delete Test Container
-./testend.sh
+source ./testend.sh
