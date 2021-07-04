@@ -1,6 +1,7 @@
 #!/bin/bash
 # delete container
 source ./gcontid.sh
+source ./sudo.sh
 
 #get delete container id
 gcontid

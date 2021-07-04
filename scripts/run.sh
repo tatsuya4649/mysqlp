@@ -5,6 +5,7 @@ source ./version.sh
 source ./docker_name.sh
 source ./datadir.sh
 source ./net.sh
+source ./sudo.sh
 
 cd ..
 

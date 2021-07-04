@@ -9,13 +9,13 @@ fi
 
 # MySQL Server Setup
 cd scripts
-source ./build.sh
-source ./run.sh
+./build.sh
+./run.sh
 
 cd ../test
 # MySQL Test Setup
 # Build Test Container, And RUN.
 # And Python MySQL Test scripts.
-source ./testd.sh
+./testd.sh
 # End Test,And Delete Test Container
-source ./testend.sh
+./testend.sh

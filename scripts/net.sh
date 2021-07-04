@@ -1,7 +1,8 @@
 #!/bin/bash
 
 source ./netname.sh
-if ! docker network create $TESTNETNAME; then
+source ./sudo.sh
+if ! $SUDO docker network create $TESTNETNAME; then
 	echo "network create failure..."
 	exit 1
 fi
